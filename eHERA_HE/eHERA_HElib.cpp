@@ -10,6 +10,36 @@ using namespace helib;
 using namespace std;
 using namespace NTL;
 
+
+//Making vector of encoded C(Matrices with all zeros except single 1) for extracting
+void EncryptC(vector<ZZX>* encC_list, EncryptedArrayDerived<PA_GF2> ea2){
+    long d = ea2.getDegree();
+    unsigned char cc[d];
+    for(int extract = 0; extract < d; extract++){
+        for(int i = 0; i < d; i ++)
+            cc[i] = 0;
+        cc[extract] = 1;
+
+        vector<GF2X> scratch(d);
+        for(int j = 0; j < d; j++)
+            GF2XFromBytes(scratch[j], &cc[j], 1);
+
+        vector<GF2X> C;
+        ea2.buildLinPolyCoeffs(C, scratch);
+
+        vector<ZZX> encC;
+        encC.resize(d);
+        scratch.resize(ea2.size());
+        for(int i = 0; i < d; i++){
+            for(int j = 0; j < ea2.size(); j++)
+                scratch[j] = C[i];
+            ea2.encode(encC[i], scratch);
+        }
+
+        encC_list[extract] = encC;
+    }
+}
+
 //Extract one ciphertext from 16 ciphertexts
 void Extract_one(Ctxt** result_list, Ctxt ctxt, vector<ZZX>* encC_list, EncryptedArrayDerived<PA_GF2> ea2){
     int degree = ea2.getDegree();
@@ -176,4 +206,21 @@ void KeySchedule(Ctxt** round_keys, Ctxt** master_key, uint64_t* rand_vectors, i
     }
 
     return;
+}
+
+//eHERA
+void eHERA(Ctxt** ctxt_list, Ctxt** round_keys, Ctxt** key_list, uint64_t* rand_vectors, const EncryptedArrayDerived<PA_GF2> ea2){
+    for(int i = 0; i < ROUNDS; i++){
+        KeySchedule(round_keys, key_list, rand_vectors, i, ea2);
+        for(int j = 0; j < BLOCKSIZE; j++){
+            *ctxt_list[j] += *round_keys[j];
+        }
+        LinearLayer(ctxt_list, ea2);
+        SLayer(ctxt_list);
+        
+    }
+    LinearLayer(ctxt_list, ea2);
+    KeySchedule(round_keys, key_list, rand_vectors, ROUNDS, ea2);
+    for(int j = 0; j < BLOCKSIZE; j++)
+        *ctxt_list[j] += *round_keys[j];
 }
