@@ -18,7 +18,21 @@ int main(int argc, char* argv[]){
     unsigned long p = 2;
     unsigned long m = 42799;
     unsigned long r = 1;
-    unsigned long bits = 384;
+    unsigned long bits = 244;
+    switch (ROUNDS)
+    {
+    case 6:
+        bits = 300;
+        break;
+    case 7:
+        bits = 344;
+        break;
+    case 8:
+        bits = 384;
+        break;
+    default:
+        break;
+    }
     unsigned long c = 2;
     uint64_t nonce = 0x123456789abcdef;
     uint64_t counter = 0;
