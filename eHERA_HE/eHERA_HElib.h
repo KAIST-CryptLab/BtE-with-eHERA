@@ -10,7 +10,7 @@ using namespace helib;
 using namespace std;
 using namespace NTL;
 
-void EncryptC(vector<ZZX>* encC_list, EncryptedArrayDerived<PA_GF2> ea2);
+void EncodeC(vector<ZZX>* encC_list, EncryptedArrayDerived<PA_GF2> ea2);
 void Extract_one(Ctxt** result_list, Ctxt ctxt, vector<ZZX>* encC_list, EncryptedArrayDerived<PA_GF2> ea2);
 void Extract(Ctxt** result_list, Ctxt ctxt, vector<ZZX>* encC_list, EncryptedArrayDerived<PA_GF2> ea2);
 void SLayer(Ctxt **ctxt_list);

@@ -11,8 +11,8 @@ using namespace std;
 using namespace NTL;
 
 
-//Making vector of encoded C(Matrices with all zeros except single 1) for extracting
-void EncryptC(vector<ZZX>* encC_list, EncryptedArrayDerived<PA_GF2> ea2){
+// Making vector of encoded C(Matrices with all zeros except single 1) for extracting
+void EncodeC(vector<ZZX>* encC_list, EncryptedArrayDerived<PA_GF2> ea2){
     long d = ea2.getDegree();
     unsigned char cc[d];
     for(int extract = 0; extract < d; extract++){
@@ -40,7 +40,7 @@ void EncryptC(vector<ZZX>* encC_list, EncryptedArrayDerived<PA_GF2> ea2){
     }
 }
 
-//Extract one ciphertext from 16 ciphertexts
+// Extract one ciphertext from 16 ciphertexts
 void Extract_one(Ctxt** result_list, Ctxt ctxt, vector<ZZX>* encC_list, EncryptedArrayDerived<PA_GF2> ea2){
     int degree = ea2.getDegree();
     unsigned char cc[degree];
@@ -67,7 +67,7 @@ void Extract_one(Ctxt** result_list, Ctxt ctxt, vector<ZZX>* encC_list, Encrypte
     return;
 }
 
-//Extract 16 ciphertexts
+// Extract 16 ciphertexts
 void Extract(Ctxt** result_list, Ctxt ctxt, vector<ZZX>* encC_list, EncryptedArrayDerived<PA_GF2> ea2){
     int degree = ea2.getDegree();
     unsigned char cc[degree];
@@ -96,7 +96,7 @@ void Extract(Ctxt** result_list, Ctxt ctxt, vector<ZZX>* encC_list, EncryptedArr
     return;
 }
 
-//X^17 with HElib
+// X^17 with HElib
 void SLayer(Ctxt **ctxt_list){
     for (int i = 0; i < BLOCKSIZE; i ++){
         Ctxt buf = Ctxt(*ctxt_list[i]);
@@ -106,11 +106,11 @@ void SLayer(Ctxt **ctxt_list){
     }
 }
 
-//Linear Layer with HElib
+// Linear Layer with HElib
 void LinearLayer(Ctxt **ctxt_list, EncryptedArrayDerived<PA_GF2> ea2){
     Ctxt *result[BLOCKSIZE];
 
-    //ptxt_const : encoded alpha
+    // ptxt_const : encoded alpha
     vector<GF2X> consts(ea2.size(), GF2X(GF2::zero()));
     for(int i = 0; i < ea2.size(); i++){
         SetX(consts[i]);
@@ -118,7 +118,7 @@ void LinearLayer(Ctxt **ctxt_list, EncryptedArrayDerived<PA_GF2> ea2){
     ZZX ptxt_consts;
     ea2.encode(ptxt_consts, consts);
 
-    //MixColumn
+    // MixColumn
     Ctxt *buf[BLOCKSIZE];
     for(int i = 0; i < BLOCKSIZE; i++){
         buf[i] = new Ctxt(*ctxt_list[i]);
@@ -135,7 +135,7 @@ void LinearLayer(Ctxt **ctxt_list, EncryptedArrayDerived<PA_GF2> ea2){
         }
     }
 
-    //MixRows
+    // MixRows
     for (int i = 0; i < BLOCKSIZE; i++){
         (*buf[i]).clear();
         buf[i] = new Ctxt(*result[i]);
@@ -154,7 +154,7 @@ void LinearLayer(Ctxt **ctxt_list, EncryptedArrayDerived<PA_GF2> ea2){
 }
 
 
-//Making Random Vectors
+// Making Random Vectors
 void GetRandVecPoly(uint64_t* rand_vectors, uint64_t nonce, uint64_t counter){
     blake3_hasher hasher;
     blake3_hasher_init(&hasher);
@@ -183,7 +183,7 @@ void GetRandVecPoly(uint64_t* rand_vectors, uint64_t nonce, uint64_t counter){
 }
 
 
-//Key schedule with HElib
+// Key schedule with HElib
 void KeySchedule(Ctxt** round_keys, Ctxt** master_key, uint64_t* rand_vectors, int round, EncryptedArrayDerived<PA_GF2> ea2){
     for (int i = 0; i < BLOCKSIZE; i++)
     {
@@ -208,7 +208,7 @@ void KeySchedule(Ctxt** round_keys, Ctxt** master_key, uint64_t* rand_vectors, i
     return;
 }
 
-//eHERA
+// eHERA
 void eHERA(Ctxt** ctxt_list, Ctxt** round_keys, Ctxt** key_list, uint64_t* rand_vectors, const EncryptedArrayDerived<PA_GF2> ea2){
     for(int i = 0; i < ROUNDS; i++){
         KeySchedule(round_keys, key_list, rand_vectors, i, ea2);
