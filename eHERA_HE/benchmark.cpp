@@ -113,7 +113,7 @@ int main(int argc, char* argv[]){
     uint64_t* rand_vectors = static_cast<uint64_t*>
         (aligned_alloc(32, sizeof(uint64_t) * (XOF_ELEMENT_COUNT + 8)));
     memset(rand_vectors, 0, sizeof(uint64_t) * (XOF_ELEMENT_COUNT + 8));
-    GetRandVecPoly(rand_vectors, nonce, counter);
+    getRandVecPoly(rand_vectors, nonce, counter);
 
 
     ZZX dec_ff;
@@ -151,18 +151,18 @@ int main(int argc, char* argv[]){
     vector<ZZX> encC_list[d];
 
     //Making vector of encoded C(Matrices with all zeros except single 1) for extracting
-    EncryptC(encC_list, ea2);
+    buildLinPolyExtract(encC_list, ea2);
 
     //Extracting a bit from a ctxt
     start = clock();
-    Extract_one(extract_result, *ctxt_list[0], encC_list, ea2);
+    extractOne(extract_result, *ctxt_list[0], encC_list, ea2);
     end = clock();
     cout << "Extracting 1 ctxt's 1 bits :" << ((double)(end - start)) / CLOCKS_PER_SEC << "s" << endl;
 
     //Extracting 16 ctxt's 21 bits
     start = clock();
     for(int ctxt_index = 0; ctxt_index < 1; ctxt_index++){
-        Extract(extract_result, *ctxt_list[ctxt_index], encC_list, ea2);
+        extract(extract_result, *ctxt_list[ctxt_index], encC_list, ea2);
     }
     end = clock();
     cout << "Extracting 16 ctxt's 21 bits :" << ((double)(end - start)) / CLOCKS_PER_SEC << "s" << endl;
