@@ -1,9 +1,9 @@
-BLAKEPATH = BLAKE3/c/
-BLAKEHEADER = $(BLAKEPATH)blake3.h
+BLAKEPATH = BLAKE3/c
+BLAKEHEADER = $(BLAKEPATH)/blake3.h
 LIBBLAKE = -L$(BLAKEPATH) -lblake3
 
-HELIBPATH = helib_pack/
-HELIBHEADERS = $(HELIBPATH)include
+HELIBPATH = helib_pack
+HELIBHEADERS = $(HELIBPATH)/include
 LIBHELIB = -L$(HELIBPATH)lib/ -lhelib
 
 SOURCE = eHERA_HElib.cpp benchmark.cpp
