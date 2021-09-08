@@ -1,5 +1,5 @@
 # BtE Transciphering Framework with eHERA
-This is an implementation of the server-side BtE transciphering framework with the eHERA cipher using `HElib` library.
+This is an implementation of the BtE transciphering framework with the eHERA cipher using `HElib` library.
 
 ## Install
 
@@ -17,7 +17,7 @@ make
 
 ## Benchmark
 
-You can run the benchmark of server-side BtE transciphering with eHERA using [benchmark.cpp](./eHERA_HE/benchmark.cpp).
+You can run the benchmark of BtE transciphering with eHERA using [benchmark.cpp](./eHERA_HE/benchmark.cpp).
 The benchmark parameters are given in [params.h](./eHERA_HE/params.h).
 To benchmark all the parameters, run the following command in [eHERA_HE](./eHERA_HE) directory.
 
