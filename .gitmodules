@@ -1,6 +1,0 @@
-[submodule "BLAKE3"]
-	path = BLAKE3
-	url = git@github.com:BLAKE3-team/BLAKE3
-[submodule "HElib"]
-	path = HElib
-	url = https://github.com/homenc/HElib.git

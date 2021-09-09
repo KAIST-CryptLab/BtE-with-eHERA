@@ -1,4 +1,4 @@
-LDOPTS = -lgmp -lntl -lpthread -lhelib -lblake3
+LDOPTS = -pthread -lgmp -lntl -lhelib -lblake3
 
 all: benchmark
 
