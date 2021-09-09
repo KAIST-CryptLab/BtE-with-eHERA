@@ -1,9 +1,9 @@
 #include <iostream>
 
-#include "params.h"
+#include "parms.h"
 #include <helib/helib.h>
 #include <helib/EncryptedArray.h>
-#include "../BLAKE3/c/blake3.h"
+#include <BLAKE3/c/blake3.h>
 #include <time.h>
 
 using namespace helib;
