@@ -43,7 +43,6 @@ void buildLinPolyExtract(vector<ZZX>* encC_list, EncryptedArrayDerived<PA_GF2> e
 // Extract one ciphertext from 16 ciphertexts
 void extractOne(Ctxt** result_list, Ctxt ctxt, vector<ZZX>* encC_list, EncryptedArrayDerived<PA_GF2> ea2){
     int degree = ea2.getDegree();
-    unsigned char cc[degree];
     Ctxt* frob_list[degree];
 
     frob_list[0] = new Ctxt(ctxt);
