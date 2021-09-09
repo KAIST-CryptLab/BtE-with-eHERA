@@ -1,7 +1,6 @@
 # BtE Transciphering Framework with eHERA
 This is an implementation of the BtE transciphering framework with the eHERA cipher.
-It includes the client-side encryption [eHERA_client](./eHERA_client) by eHERA, the server-side transciphering [eHERA_HE](./eHERA_HE), 
-and required libraries as submodules.
+It includes the client-side encryption [eHERA_client](./eHERA_client) by eHERA, and the server-side transciphering [eHERA_HE](./eHERA_HE).
 
 ## Client-side
 
