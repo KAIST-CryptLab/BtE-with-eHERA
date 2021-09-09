@@ -19,7 +19,7 @@ Parameter presets are given in [parms.h](./eHERA_HE/parms.h).
 
 ## Dependency
 
-To run the BtE framework with eHERA, C version of [BLAKE3](https://github.com/BLAKE3-team/BLAKE3.git) version 1.0.0.
-and [HElib](https://github.com/homenc/HElib.git) version 2.1.0. are required to be built.
+To run the BtE framework with eHERA, C version of [BLAKE3](https://github.com/BLAKE3-team/BLAKE3.git) ver 1.0.0.
+and [HElib](https://github.com/homenc/HElib.git) ver 2.1.0. are required to be built.
 The C version of `BLAKE3` should be built to support AVX2 intrinsics in order to benchmark properly.
 
