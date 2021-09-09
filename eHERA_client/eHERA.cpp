@@ -24,7 +24,6 @@ block_t block_init(size_t sz)
 // Carry-less multiplication
 uint64_t clmul(uint64_t a, uint64_t b)
 {
-    uint64_t cnt = 0;
     uint64_t res = 0;
     int64_t a_copy = (int64_t) a;
 

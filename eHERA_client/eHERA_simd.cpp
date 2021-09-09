@@ -221,7 +221,7 @@ void eHera::add_round_key(block_t out, int round)
 // Encrypt by eHERA with AVX2 instructions
 void eHera::crypt(block_t out)
 {
-    __m256i u0, u1, u2, u3, v0, v1, v2, v3, p0, p1, p2, p3, q0, q1, q2, q3;
+    __m256i u0, u1, u2, u3, v0, v1, v2, v3, p0, p1, p2, p3;
     __m128i w0, w1, w2, w3, z0, z1, z2, z3, x0, x1, x2, x3, y0, y1, y2, y3;
     __m128i deg128 = _mm_set1_epi64x(DEG);
     __m128i two128 = _mm_set1_epi64x(2);
