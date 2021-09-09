@@ -5,7 +5,7 @@
 #include "eHERA.h"
 #include "parms.h"
 #include <iomanip>
-#include "../BLAKE3/c/blake3.h"
+#include <BLAKE3/c/blake3.h>
 
 using namespace std;
 
