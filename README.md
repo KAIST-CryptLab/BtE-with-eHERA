@@ -21,6 +21,7 @@ Parameter presets are given in [parms.h](./eHERA_HE/parms.h).
 ## Build and Benchmark
 
 To run the BtE framework with eHERA, C version of [BLAKE3](https://github.com/BLAKE3-team/BLAKE3.git) and [HElib](https://github.com/homenc/HElib.git) are required to be built.
+As we assumes that those two libraries are built globally, the library paths should be set manually if the libraries are built locally.
 The C version of `BLAKE3` should be built to support AVX2 intrinsics in order to benchmark properly.
 Then you can make execution file(s) in both [eHERA_client](./eHERA_client) and [eHERA_HE](./eHERA_HE) directory by
 ```batch
