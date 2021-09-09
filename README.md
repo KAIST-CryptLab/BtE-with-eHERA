@@ -7,13 +7,13 @@ and required libraries as submodules.
 
 [eHERA_client](./eHERA_client) contains a client-side implementation of the BtE framework:
 pure C++ implementation of the eHERA cipher, and
-an AVX2-optimized C++ implementation of the eHERA cipher, whose XOF is instantiated by [BLAKE3](https://github.com/BLAKE3-team/BLAKE3.git).
+an AVX2-optimized C++ implementation of the eHERA cipher, whose XOF is instantiated by [BLAKE3](https://github.com/BLAKE3-team/BLAKE3.git) version 1.0.0.
 Parameter presets are given in [parms.h](./eHERA_client/parms.h).
 
 ## Server-side
 
 [eHERA_HE](./eHERA_HE) is a server-side implementation of the BtE framework.
-The BtE framework is implemented using [HElib](https://github.com/homenc/HElib.git).
+The BtE framework is implemented using [HElib](https://github.com/homenc/HElib.git) version 2.1.0.
 The server-side homomorphically evaluates eHERA keystream under BGV scheme to recover the original data, and extracts digits.
 Parameter presets are given in [parms.h](./eHERA_HE/parms.h).
 
@@ -22,12 +22,6 @@ Parameter presets are given in [parms.h](./eHERA_HE/parms.h).
 
 To run the BtE framework with eHERA, C version of [BLAKE3](https://github.com/BLAKE3-team/BLAKE3.git) and [HElib](https://github.com/homenc/HElib.git) are required to be built.
 The C version of `BLAKE3` should be built to support AVX2 intrinsics in order to benchmark properly.
-If `BLAKE3` is built to a shared library, it is required to set path by
-```batch
-export LD_LIBRARY_PATH=LD_LIBRARY_PATH:../BLAKE3/c
-```
-since `BLAKEPATH` in [Makefile](./eHERA_client/Makefile) is set to the local path.
-After building `HElib`, it is required to set `HELIBPATH` in [Makefile](./eHERA_HE/Makefile) properly.
 Then you can make execution file(s) in both [eHERA_client](./eHERA_client) and [eHERA_HE](./eHERA_HE) directory by
 ```batch
 make
