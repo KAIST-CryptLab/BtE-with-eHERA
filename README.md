@@ -18,10 +18,15 @@ The server-side homomorphically evaluates eHERA keystream under BGV scheme to re
 Parameter presets are given in [parms.h](./eHERA_HE/parms.h).
 
 
-## Install and Benchmark
+## Build and Benchmark
 
 To run the BtE framework with eHERA, C version of [BLAKE3](https://github.com/BLAKE3-team/BLAKE3.git) and [HElib](https://github.com/homenc/HElib.git) are required to be built.
 The C version of `BLAKE3` should be built to support AVX2 intrinsics in order to benchmark properly.
+If `BLAKE3` is built to a shared library, it is required to set path by
+```batch
+export LD_LIBRARY_PATH=LD_LIBRARY_PATH:../BLAKE3/c
+```
+After building `HElib`, it is required to set `HELIBPATH` in [Makefile](./eHERA_HE/Makefile) properly.
 Then you can make execution file(s) in both [eHERA_client](./eHERA_client) and [eHERA_HE](./eHERA_HE) directory by
 ```batch
 make
